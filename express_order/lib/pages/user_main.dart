@@ -32,15 +32,15 @@ class _UserMainState extends State<UserMain> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: ' Dashboard ',
+            label: ' Achat/Vente ',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: ' Profile ',
+            label: ' Profil ',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: ' Change Password ',
+            label: ' Paramètres ',
           )
         ],
 
