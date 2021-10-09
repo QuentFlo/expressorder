@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:exif/exif.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,7 @@ class Dashboard extends StatefulWidget {
   late String ok = " ";
   late List listtest = [];
   late List listimage = [];
+
 }
 
 class _State extends State<Dashboard> {
@@ -129,6 +132,7 @@ class _State extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     String kok;
+
     return Scaffold(
       appBar: AppBar(title: Text("DASHBOARD")),
       body: ListView(
@@ -145,7 +149,9 @@ class _State extends State<Dashboard> {
                         content: Text("$onValue en vente"),
                       );
                       widget.ok = onValue;
-                                          widget.listtest.add(widget.ok);
+                      widget.listtest.add(widget.ok);
+                      //ref.child(widget.ok).set()
+
                       Scaffold.of(context).showSnackBar(mySnackBar);
                     });
                   },
