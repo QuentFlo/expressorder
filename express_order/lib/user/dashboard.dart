@@ -13,12 +13,12 @@ class Dashboard extends StatefulWidget {
   late File image;
   late String ok = " ";
   late List listtest = [];
-
+  late List listimage = [];
 }
 
 class _State extends State<Dashboard> {
   final _formKey = GlobalKey<FormState>();
-  
+
   Future<dynamic> createAlertDialog2(BuildContext context) {
     TextEditingController customContrller = TextEditingController();
     final picker = ImagePicker();
@@ -70,14 +70,14 @@ class _State extends State<Dashboard> {
         widget.image = File(PickedFile.path);
         final fileBytes = widget.image.readAsBytesSync();
         final data = await readExifFromBytes(fileBytes, details: false);
+        widget.listimage.add(widget.image);
       } else
         print('No image selected.');
     }
-    widget.listtest.add(widget.ok);
-    widget.listtest.cast<String>();
 
+
+    //widget.listimage.add(widget.image);
     return showDialog(
-      
         context: context,
         builder: (context) {
           return AlertDialog(
@@ -117,6 +117,7 @@ class _State extends State<Dashboard> {
               MaterialButton(
                   onPressed: () {
                     OnOpenGallery();
+
                   },
                   elevation: 5,
                   child: Text("Choose photo"))
@@ -129,14 +130,13 @@ class _State extends State<Dashboard> {
   Widget build(BuildContext context) {
     String kok;
     return Scaffold(
-        appBar: AppBar(title: Text("DASHBOARD")),
-        body: ListView(
-            shrinkWrap: true,
-            children: <Widget>[
-
-            Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
+      appBar: AppBar(title: Text("DASHBOARD")),
+      body: ListView(
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          physics: ClampingScrollPhysics(),
+          children: <Widget>[
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
               TextButton(
                   child: Text("Vendre"),
                   onPressed: () {
@@ -145,6 +145,7 @@ class _State extends State<Dashboard> {
                         content: Text("$onValue en vente"),
                       );
                       widget.ok = onValue;
+                                          widget.listtest.add(widget.ok);
                       Scaffold.of(context).showSnackBar(mySnackBar);
                     });
                   },
@@ -163,6 +164,7 @@ class _State extends State<Dashboard> {
                         content: Text("$onValue trouvé"),
                       );
                       widget.ok = onValue;
+                      widget.listtest.add(widget.ok);
                       Scaffold.of(context).showSnackBar(mySnackBar);
                     });
                   },
@@ -176,7 +178,6 @@ class _State extends State<Dashboard> {
               //Text(widget.ok),
               //Image.file(widget.image),
 
-              
               // ListView.builder(
               //   itemCount: widget.listtest.length,
               //   itemBuilder: (context, i) {
@@ -185,30 +186,34 @@ class _State extends State<Dashboard> {
               //         title: widget.listtest[i].city);
               //   },
               // )
-
-          ]),
-
-         ListView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-                itemCount: widget.listtest.length,
-                itemBuilder: (context, i) {
-                  return
-                    Column(
-
-                    
-                    children: [Text(widget.listtest[i]),
-                    Image.file(widget.image)
-
-                    ]
-                  );
-                        //child: Image.file(widget.image),
-
-                  },
-              )
-
             ]),
-            
-      );
+
+            ListView.separated(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              physics: ClampingScrollPhysics(),
+              itemCount: widget.listtest.length,
+              itemBuilder: (context, i) {
+                return Card(
+                    child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(widget.listtest[i]),
+                )
+                    //Image.file(widget.listimage[i])
+
+                    );
+                //child: Image.file(widget.image),
+              },
+              separatorBuilder: (context, i) {
+                return Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Image.file(widget.listimage[i])
+                  )
+                );
+              },
+            )
+          ]),
+    );
   }
 }
