@@ -92,7 +92,7 @@ class _SignupState extends State<Signup> {
         children: [
           Padding(
               padding: const EdgeInsets.all(30.0),
-          child: Image.asset('images/login.jpg'),
+          child: Image.asset('images/register.png'),
           ),
           Container(
             margin: EdgeInsets.symmetric(vertical: 10.0),

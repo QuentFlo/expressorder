@@ -38,18 +38,18 @@ class _ProfileState extends State<Profile> {
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
-              child: Image.asset('images/login.jpg'),),
+              child: Image.asset('images/profil.png'),),
           SizedBox(height: 50.0,),
           Column(
             children: [
-              Text(
+/*              Text(
                   'ID utilisateur:',
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               Text(
                 uid,
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300,),
-              )
+              )*/
             ],
           ),
           SizedBox(height: 50.0,),
@@ -61,7 +61,7 @@ class _ProfileState extends State<Profile> {
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w100,),
               ),
 
-              user!.emailVerified ? Text('Vérifié',
+              /*user!.emailVerified ? Text('Vérifié',
               style: TextStyle(fontSize: 22.0, color: Colors.lightBlue),
               ) :
 
@@ -70,7 +70,7 @@ class _ProfileState extends State<Profile> {
               },
                   child: Text(' Verifier Email',
                   style: TextStyle(fontSize: 22.0, color: Colors.lightBlue),),
-              ),
+              ),*/
             ],
           ),
           SizedBox(height: 50.0,),

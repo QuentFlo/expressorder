@@ -60,7 +60,7 @@ class _ForgotPassState extends State<ForgotPass> {
         children: [
          Padding(
              padding: const EdgeInsets.all(20.0),
-         child: Image.asset('images/login.jpg'),
+         child: Image.asset('images/password.png'),
          ),
           Container(
             margin: EdgeInsets.only(top: 20.0),

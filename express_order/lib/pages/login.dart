@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
           child: ListView(
             children: [
               Padding(padding: const EdgeInsets.all(0.0),
-          child: Image.asset('images/login.jpg'),
+          child: Image.asset('images/login.png'),
               ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.0),

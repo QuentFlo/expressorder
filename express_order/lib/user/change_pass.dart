@@ -53,7 +53,7 @@ class _ChangePassState extends State<ChangePass> {
                 SizedBox(height: 100,),
                 Padding(
                     padding: const EdgeInsets.all(10.0),
-                child: Image.asset('images/login.jpg'),),
+                child: Image.asset('images/settings.png'),),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
