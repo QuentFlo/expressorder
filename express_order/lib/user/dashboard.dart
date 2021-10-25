@@ -3,20 +3,29 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:exif/exif.dart';
+import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  Dashboard({Key? key, required this.image}) : super(key: key);
 
   @override
   _State createState() => _State();
+  final File image;
+  final String ok = " ";
+  final List listtest = [];
+  final List listimage = [];
+
 }
 
 class _State extends State<Dashboard> {
 
  late File image;
-  late String ok = " ";
-  late List listtest = [];
-  late List listimage = [];
+  final String ok = " ";
+  final List listtest = [];
+  final List listimage = [];
 
   Future<dynamic> createAlertDialog2(BuildContext context) {
     TextEditingController customContrller = TextEditingController();
@@ -124,6 +133,8 @@ class _State extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    String kok;
+
     return Scaffold(
       appBar: AppBar(title: const Text("Boutique")),
       body: ListView(
@@ -139,11 +150,10 @@ class _State extends State<Dashboard> {
                       SnackBar mySnackBar = SnackBar(
                         content: Text("$onValue en vente"),
                       );
-                      
-                      ok = onValue;
-                                          
-                                          listtest.add(
-                                            ok);
+                      widget.ok = onValue;
+                      widget.listtest.add(widget.ok);
+                      //ref.child(widget.ok).set()
+
                       Scaffold.of(context).showSnackBar(mySnackBar);
                     });
                   },
