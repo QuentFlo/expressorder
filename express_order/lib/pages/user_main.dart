@@ -12,9 +12,9 @@ class UserMain extends StatefulWidget {
 
 class _UserMainState extends State<UserMain> {
   int _selectedIndex = 0;
-  static List<Widget> _WidgetOptions = <Widget>[
-    Dashboard(),
-    Profile(),
+  static final List<Widget> _WidgetOptions = <Widget>[
+    const Dashboard(),
+    const Profile(),
     ChangePass(),
   ];
 

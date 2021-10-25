@@ -27,10 +27,10 @@ class _ChangePassState extends State<ChangePass> {
     try{
       await currentUser!.updatePassword(newPassword);
       FirebaseAuth.instance.signOut();
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage(),
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage(),
       ),
       );
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         backgroundColor: Colors.black26,
         content: Text('Votre mot de passe a été changé. Veuillez vous reconnecter !'),
       ),
@@ -47,19 +47,19 @@ class _ChangePassState extends State<ChangePass> {
       body: Form(
         key: _formKey,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
+            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 25.0),
             child: ListView(
               children: [
-                SizedBox(height: 100,),
+                const SizedBox(height: 100,),
                 Padding(
                     padding: const EdgeInsets.all(10.0),
                 child: Image.asset('images/settings.png'),),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 10.0),
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
                     autofocus: false,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Nouveau mot de passe:',
                       hintText: 'Entrer votre nouveau mot de passe',
                       labelStyle: TextStyle(fontSize: 20.0),
@@ -83,7 +83,7 @@ class _ChangePassState extends State<ChangePass> {
                     changePassword();
                   }
                 },
-                    child: Text('Changer mot de passe',
+                    child: const Text('Changer mot de passe',
                     style: TextStyle(fontSize: 18.0),
                     ),
                 ),

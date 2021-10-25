@@ -3,45 +3,43 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:exif/exif.dart';
-import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
+  const Dashboard({Key? key}) : super(key: key);
+
   @override
   _State createState() => _State();
-  late File image;
-  late String ok = " ";
-  late List listtest = [];
-  late List listimage = [];
 }
 
 class _State extends State<Dashboard> {
-  final _formKey = GlobalKey<FormState>();
+
+ late File image;
+  late String ok = " ";
+  late List listtest = [];
+  late List listimage = [];
 
   Future<dynamic> createAlertDialog2(BuildContext context) {
     TextEditingController customContrller = TextEditingController();
-    final picker = ImagePicker();
 
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Article à Acheter"),
+            title: const Text("Article à Acheter"),
             content: Column(children: <Widget>[
               Padding(
-                padding: EdgeInsets.all(1),
+                padding: const EdgeInsets.all(1),
                 child: TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Titre',
                   ),
                   controller: customContrller,
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(1),
+                padding: const EdgeInsets.all(1),
                 child: TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Prix Max',
                   ),
                 ),
@@ -51,9 +49,9 @@ class _State extends State<Dashboard> {
                     Navigator.of(context).pop(customContrller.text.toString());
                   },
                   elevation: 5,
-                  child: Text("Search")),
+                  child: const Text("Search")),
               MaterialButton(
-                  onPressed: () {}, elevation: 5, child: Text("Open Map"))
+                  onPressed: () {}, elevation: 5, child: const Text("Open Map"))
             ]),
           );
         });
@@ -67,10 +65,8 @@ class _State extends State<Dashboard> {
       final PickedFile = await picker.getImage(source: ImageSource.gallery);
 
       if (PickedFile != null) {
-        widget.image = File(PickedFile.path);
-        final fileBytes = widget.image.readAsBytesSync();
-        final data = await readExifFromBytes(fileBytes, details: false);
-        widget.listimage.add(widget.image);
+        image = File(PickedFile.path);
+        listimage.add(image);
       } else
         print('No image selected.');
     }
@@ -81,29 +77,29 @@ class _State extends State<Dashboard> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Article à vendre"),
+            title: const Text("Article à vendre"),
             content: Column(children: <Widget>[
               Padding(
-                padding: EdgeInsets.all(1),
+                padding: const EdgeInsets.all(1),
                 child: TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Titre',
                   ),
                   controller: customContrller,
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(1),
+                padding: const EdgeInsets.all(1),
                 child: TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Prix',
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(1),
+                padding: const EdgeInsets.all(1),
                 child: TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Description',
                   ),
                 ),
@@ -113,14 +109,14 @@ class _State extends State<Dashboard> {
                     Navigator.of(context).pop(customContrller.text.toString());
                   },
                   elevation: 5,
-                  child: Text("Submit")),
+                  child: const Text("Submit")),
               MaterialButton(
                   onPressed: () {
                     OnOpenGallery();
 
                   },
                   elevation: 5,
-                  child: Text("Choose photo"))
+                  child: const Text("Choose photo"))
             ]),
           );
         });
@@ -128,24 +124,26 @@ class _State extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    String kok;
     return Scaffold(
-      appBar: AppBar(title: Text("DASHBOARD")),
+      appBar: AppBar(title: const Text("Boutique")),
       body: ListView(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
-          physics: ClampingScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           children: <Widget>[
             Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
               TextButton(
-                  child: Text("Vendre"),
+                  child: const Text("Vendre"),
                   onPressed: () {
                     createAlertDialog(context).then((onValue) {
                       SnackBar mySnackBar = SnackBar(
                         content: Text("$onValue en vente"),
                       );
-                      widget.ok = onValue;
-                                          widget.listtest.add(widget.ok);
+                      
+                      ok = onValue;
+                                          
+                                          listtest.add(
+                                            ok);
                       Scaffold.of(context).showSnackBar(mySnackBar);
                     });
                   },
@@ -157,14 +155,17 @@ class _State extends State<Dashboard> {
                   )),
 
               TextButton(
-                  child: Text("Acheter"),
+                  child: const Text("Acheter"),
                   onPressed: () {
                     createAlertDialog2(context).then((onValue) {
                       SnackBar mySnackBar = SnackBar(
                         content: Text("$onValue trouvé"),
                       );
-                      widget.ok = onValue;
-                      widget.listtest.add(widget.ok);
+                      
+                      ok = onValue;
+                      
+                      listtest.add(
+                        ok);
                       Scaffold.of(context).showSnackBar(mySnackBar);
                     });
                   },
@@ -174,8 +175,9 @@ class _State extends State<Dashboard> {
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.black),
                   )),
-              Text("Article mis en vente"),
-              //Text(widget.ok),
+              const Text("Article mis en vente"),
+              //Text(
+              //ok),
               //Image.file(widget.image),
 
               // ListView.builder(
@@ -191,13 +193,13 @@ class _State extends State<Dashboard> {
             ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              physics: ClampingScrollPhysics(),
-              itemCount: widget.listtest.length,
+              physics: const ClampingScrollPhysics(),
+              itemCount: listtest.length,
               itemBuilder: (context, i) {
                 return Card(
                     child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text(widget.listtest[i]),
+                  padding: const EdgeInsets.all(10),
+                  child: Text(listtest[i]),
                 )
                     //Image.file(widget.listimage[i])
 
@@ -207,8 +209,8 @@ class _State extends State<Dashboard> {
               separatorBuilder: (context, i) {
                 return Card(
                   child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Image.file(widget.listimage[i])
+                    padding: const EdgeInsets.all(10),
+                    child: Image.file(listimage[i])
                   )
                 );
               },

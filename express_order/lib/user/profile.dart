@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
+  const Profile({Key? key}) : super(key: key);
+
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -20,9 +22,8 @@ class _ProfileState extends State<Profile> {
   verifyEmail() async{
     if(user != null && !user!.emailVerified){
       await user!.sendEmailVerification();
-      print('Un mail de vérification a été envoyé');
       
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         backgroundColor: Colors.black26,
         content: Text('Un mail de vérification a été envoyé',
         style: TextStyle(fontSize: 18.0, color: Colors.amber),),
@@ -33,15 +34,15 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 60.0),
+      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 60.0),
       child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
               child: Image.asset('images/profil.png'),),
-          SizedBox(height: 50.0,),
+          const SizedBox(height: 50.0,),
           Column(
-            children: [
+            children: const [
 /*              Text(
                   'ID utilisateur:',
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
@@ -52,13 +53,13 @@ class _ProfileState extends State<Profile> {
               )*/
             ],
           ),
-          SizedBox(height: 50.0,),
+          const SizedBox(height: 50.0,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                   'Email: $email',
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w100,),
+              style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w100,),
               ),
 
               /*user!.emailVerified ? Text('Vérifié',
@@ -73,24 +74,24 @@ class _ProfileState extends State<Profile> {
               ),*/
             ],
           ),
-          SizedBox(height: 50.0,),
+          const SizedBox(height: 50.0,),
           Column(
             children: [
-              Text('Crée le : ',
+              const Text('Crée le : ',
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
               Text(
                 creationTime.toString(),
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300,),
+                style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300,),
               )
             ],
           ),
-          SizedBox(height: 50.0,),
+          const SizedBox(height: 50.0,),
           ElevatedButton(onPressed: () async{
             await FirebaseAuth.instance.signOut();
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginPage(),), (route) => false);
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginPage(),), (route) => false);
           },
-              child: Text(
+              child: const Text(
                   'Deconnexion',
               style: TextStyle(fontSize: 18.0),
               ),

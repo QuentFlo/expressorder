@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPass extends StatefulWidget {
+  const ForgotPass({Key? key}) : super(key: key);
+
 
   @override
   _ForgotPassState createState() => _ForgotPassState();
@@ -21,18 +23,17 @@ class _ForgotPassState extends State<ForgotPass> {
   resetPassword() async{
     try{
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         backgroundColor: Colors.amber,
         content: Text('Un mail de réinitialisation vous a été envoyé !',
         style: TextStyle(fontSize: 18.0),
         ),
       ),
       );
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage(),),);
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage(),),);
     } on FirebaseAuthException catch(error){
       if(error.code == 'user-not-found'){
-        print('Aucun utilisateur associé à cet adresse email');
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.amber,
           content: Text('Aucun utilisateur associé à cet adresse email',
             style: TextStyle(fontSize: 18.0, color: Colors.amber),
@@ -54,7 +55,7 @@ class _ForgotPassState extends State<ForgotPass> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('réinitialiser mot de passe'),
+        title: const Text('réinitialiser mot de passe'),
       ),
       body: Column(
         children: [
@@ -63,8 +64,8 @@ class _ForgotPassState extends State<ForgotPass> {
          child: Image.asset('images/password.png'),
          ),
           Container(
-            margin: EdgeInsets.only(top: 20.0),
-            child: Text('un lien de réinitialisation va vous être envoyé par email !',
+            margin: const EdgeInsets.only(top: 20.0),
+            child: const Text('un lien de réinitialisation va vous être envoyé par email !',
             style: TextStyle(fontSize: 20.0),
             ),
           ),
@@ -72,14 +73,14 @@ class _ForgotPassState extends State<ForgotPass> {
               child: Form(
                 key: _formKey,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+                  padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
                   child: ListView(
                     children: [
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 10.0),
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
                         child: TextFormField(
                           autofocus: false,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Email',
                             labelStyle: TextStyle(
                               color: Colors.black26,fontSize: 15.0,
@@ -98,7 +99,7 @@ class _ForgotPassState extends State<ForgotPass> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 20.0),
+                        margin: const EdgeInsets.symmetric(vertical: 20.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -110,32 +111,30 @@ class _ForgotPassState extends State<ForgotPass> {
                                 resetPassword();
                               }
                             },
-                                child: Text('Envoyer ',
+                                child: const Text('Envoyer ',
                                 style: TextStyle(fontSize: 18.0),),
                             ),
                             TextButton(onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage(), ),);
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> const LoginPage(), ),);
                             },
-                                child: Text('Connexion',
+                                child: const Text('Connexion',
                                 style: TextStyle(fontSize: 13.0),
                                 ),
                             ),
                           ],
                         ),
                       ),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Vous n'avez pas de compte ?"),
-                            TextButton(onPressed: (){
-                              Navigator.pushAndRemoveUntil(context, PageRouteBuilder(pageBuilder: (context,a,b) => Signup(),
-                              transitionDuration: Duration(seconds: 0),), (route) => false);
-                            },
-                                child: Text('Inscription')
-                            ),
-                          ],
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Vous n'avez pas de compte ?"),
+                          TextButton(onPressed: (){
+                            Navigator.pushAndRemoveUntil(context, PageRouteBuilder(pageBuilder: (context,a,b) => Signup(),
+                            transitionDuration: const Duration(seconds: 0),), (route) => false);
+                          },
+                              child: const Text('Inscription')
+                          ),
+                        ],
                       ),
                     ],
                   ),
