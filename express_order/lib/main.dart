@@ -35,10 +35,10 @@ class MyApp extends StatelessWidget {
       ),
           home:const LoginPage(),
           getPages: [
+            GetPage(name: "/", page: () => const LoginPage()),
             GetPage(name: "/usermain", page: () => const UserMain()),
             GetPage(name: "/forgotpass", page: () => const ForgotPass()),
             GetPage(name: "/signup", page: () => const Signup()),
-            GetPage(name: "/", page: () => const LoginPage()),
           ],
       );
     });
