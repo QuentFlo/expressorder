@@ -9,12 +9,12 @@ import 'package:exif/exif.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
-  Dashboard({Key? key, required this.image}) : super(key: key);
+  Dashboard({Key? key}) : super(key: key);
 
   @override
   _State createState() => _State();
-  final File image;
-  final String ok = " ";
+  late File image;
+  String ok = " ";
   final List listtest = [];
   final List listimage = [];
 
@@ -23,7 +23,7 @@ class Dashboard extends StatefulWidget {
 class _State extends State<Dashboard> {
 
  late File image;
-  final String ok = " ";
+  late String ok = " ";
   final List listtest = [];
   final List listimage = [];
 
