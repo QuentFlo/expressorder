@@ -129,7 +129,7 @@ class _ForgotPassState extends State<ForgotPass> {
                         children: [
                           const Text("Vous n'avez pas de compte ?"),
                           TextButton(onPressed: (){
-                            Navigator.pushAndRemoveUntil(context, PageRouteBuilder(pageBuilder: (context,a,b) => Signup(),
+                            Navigator.pushAndRemoveUntil(context, PageRouteBuilder(pageBuilder: (context,a,b) => const Signup(),
                             transitionDuration: const Duration(seconds: 0),), (route) => false);
                           },
                               child: const Text('Inscription')

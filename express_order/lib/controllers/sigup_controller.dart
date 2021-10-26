@@ -18,7 +18,7 @@ class SignupController extends GetxController {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
-        print(userCredential);
+        debugPrint(userCredential.toString());
         Get.snackbar("Inscription", "Inscription réussie");
         Get.toNamed("/");
       } on FirebaseAuthException catch (error) {

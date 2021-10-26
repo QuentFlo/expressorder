@@ -3,26 +3,21 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:exif/exif.dart';
-import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key? key}) : super(key: key);
 
   @override
   _State createState() => _State();
-  late File image;
-  String ok = " ";
   final List listtest = [];
   final List listimage = [];
+  //late File image;
 
 }
 
 class _State extends State<Dashboard> {
 
- late File image;
+  late File image;
   late String ok = " ";
   final List listtest = [];
   final List listimage = [];
@@ -70,14 +65,13 @@ class _State extends State<Dashboard> {
     TextEditingController customContrller = TextEditingController();
     final picker = ImagePicker();
 
-    Future OnOpenGallery() async {
-      final PickedFile = await picker.getImage(source: ImageSource.gallery);
+    Future onOpenGallery() async {
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-      if (PickedFile != null) {
-        image = File(PickedFile.path);
+
+        image = File(pickedFile!.path);
         listimage.add(image);
-      } else
-        print('No image selected.');
+ 
     }
 
 
@@ -121,7 +115,7 @@ class _State extends State<Dashboard> {
                   child: const Text("Submit")),
               MaterialButton(
                   onPressed: () {
-                    OnOpenGallery();
+                    onOpenGallery();
 
                   },
                   elevation: 5,
@@ -133,7 +127,6 @@ class _State extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    String kok;
 
     return Scaffold(
       appBar: AppBar(title: const Text("Boutique")),
@@ -150,11 +143,11 @@ class _State extends State<Dashboard> {
                       SnackBar mySnackBar = SnackBar(
                         content: Text("$onValue en vente"),
                       );
-                      widget.ok = onValue;
-                      widget.listtest.add(widget.ok);
+                      ok = onValue;
+                      widget.listtest.add(ok);
                       //ref.child(widget.ok).set()
 
-                      Scaffold.of(context).showSnackBar(mySnackBar);
+                      ScaffoldMessenger.of(context).showSnackBar(mySnackBar);
                     });
                   },
                   style: ButtonStyle(
@@ -176,7 +169,7 @@ class _State extends State<Dashboard> {
                       
                       listtest.add(
                         ok);
-                      Scaffold.of(context).showSnackBar(mySnackBar);
+                      ScaffoldMessenger.of(context).showSnackBar(mySnackBar);
                     });
                   },
                   style: ButtonStyle(

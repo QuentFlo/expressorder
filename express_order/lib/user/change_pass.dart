@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ChangePass extends StatefulWidget {
+  const ChangePass({Key? key}) : super(key: key);
+
 
   @override
   _ChangePassState createState() => _ChangePassState();
@@ -35,8 +37,8 @@ class _ChangePassState extends State<ChangePass> {
         content: Text('Votre mot de passe a été changé. Veuillez vous reconnecter !'),
       ),
       );
-    } catch (error){
-
+    } catch (error) {
+      debugPrint("error");
     }
   }
 

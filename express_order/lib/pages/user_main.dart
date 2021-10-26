@@ -12,10 +12,10 @@ class UserMain extends StatefulWidget {
 
 class _UserMainState extends State<UserMain> {
   int _selectedIndex = 0;
-  static final List<Widget> _WidgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     Dashboard(),
     const Profile(),
-    ChangePass(),
+    const ChangePass(),
   ];
 
   void _onItemTapped(int index) {
@@ -27,7 +27,7 @@ class _UserMainState extends State<UserMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _WidgetOptions.elementAt(_selectedIndex),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
