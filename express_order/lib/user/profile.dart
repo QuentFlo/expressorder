@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
@@ -19,18 +20,6 @@ class _ProfileState extends State<Profile> {
 
   User? user = FirebaseAuth.instance.currentUser;
 
-  verifyEmail() async{
-    if(user != null && !user!.emailVerified){
-      await user!.sendEmailVerification();
-      
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        backgroundColor: Colors.black26,
-        content: Text('Un mail de vérification a été envoyé',
-        style: TextStyle(fontSize: 18.0, color: Colors.amber),),
-      ),);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,14 +32,6 @@ class _ProfileState extends State<Profile> {
           const SizedBox(height: 50.0,),
           Column(
             children: const [
-/*              Text(
-                  'ID utilisateur:',
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                uid,
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300,),
-              )*/
             ],
           ),
           const SizedBox(height: 50.0,),
@@ -61,17 +42,6 @@ class _ProfileState extends State<Profile> {
                   'Email: $email',
               style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w100,),
               ),
-
-              /*user!.emailVerified ? Text('Vérifié',
-              style: TextStyle(fontSize: 22.0, color: Colors.lightBlue),
-              ) :
-
-              TextButton(onPressed: () => {
-                verifyEmail()
-              },
-                  child: Text(' Verifier Email',
-                  style: TextStyle(fontSize: 22.0, color: Colors.lightBlue),),
-              ),*/
             ],
           ),
           const SizedBox(height: 50.0,),
