@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:express_order/controllers/pickimg_controller.dart';
+import 'package:express_order/controllers/ppickimg_controller.dart';
 import 'package:get/get.dart';
 
 class Dashboard extends StatefulWidget {

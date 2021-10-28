@@ -3,7 +3,7 @@ import 'package:express_order/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:express_order/controllers/pickimg_controller.dart';
+import 'package:express_order/controllers/ppickimg_controller.dart';
 import 'package:get/get.dart';
 
 
@@ -41,6 +41,7 @@ class _ProfileState extends State<Profile> {
           MaterialButton(
                   onPressed: () {
                     controller.onOpenGallery();
+                    controller.uploadImage("ImageProfil");
                   },
                   elevation: 5,
                   color: Colors.blueGrey,
