@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:express_order/controllers/pickimg_controller.dart';
+import 'package:get/get.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key? key}) : super(key: key);
@@ -17,10 +19,11 @@ class Dashboard extends StatefulWidget {
 
 class _State extends State<Dashboard> {
 
-  late File image;
+  File? image;
   late String ok = " ";
   final List listtest = [];
   final List listimage = [];
+
 
   Future<dynamic> createAlertDialog2(BuildContext context) {
     TextEditingController customContrller = TextEditingController();
@@ -64,7 +67,8 @@ class _State extends State<Dashboard> {
   Future<dynamic> createAlertDialog(BuildContext context) {
     TextEditingController customContrller = TextEditingController();
     final picker = ImagePicker();
-
+    final controller = Get.find();
+    
     Future onOpenGallery() async {
       final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
@@ -115,8 +119,8 @@ class _State extends State<Dashboard> {
                   child: const Text("Submit")),
               MaterialButton(
                   onPressed: () {
+                    //controller.onOpenGallery();
                     onOpenGallery();
-
                   },
                   elevation: 5,
                   child: const Text("Choose photo"))
@@ -127,7 +131,7 @@ class _State extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-
+    final controller = Get.put(PickimgController());
     return Scaffold(
       appBar: AppBar(title: const Text("Boutique")),
       body: ListView(
@@ -143,6 +147,7 @@ class _State extends State<Dashboard> {
                       SnackBar mySnackBar = SnackBar(
                         content: Text("$onValue en vente"),
                       );
+                      // controller.onOpenGallery();
                       ok = onValue;
                       widget.listtest.add(ok);
                       //ref.child(widget.ok).set()

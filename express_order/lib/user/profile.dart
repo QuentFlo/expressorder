@@ -1,7 +1,10 @@
+import 'dart:io';
 import 'package:express_order/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:express_order/controllers/pickimg_controller.dart';
+import 'package:get/get.dart';
 
 
 class Profile extends StatefulWidget {
@@ -22,14 +25,27 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final controller = Get.put(PickimgController());
+
+
+    return SingleChildScrollView(
+
+    child: Container(
       margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 60.0),
       child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
-              child: Image.asset('images/profil.png'),),
+              child: Obx(() => controller.image.value != null ? Image.file(controller.image.value!) : Image.asset('images/profil.png'),)),
           const SizedBox(height: 50.0,),
+          MaterialButton(
+                  onPressed: () {
+                    controller.onOpenGallery();
+                  },
+                  elevation: 5,
+                  color: Colors.blueGrey,
+                  child: const Text("Choose photo")),
+                  
           Column(
             children: const [
             ],
@@ -52,7 +68,7 @@ class _ProfileState extends State<Profile> {
               ),
               Text(
                 creationTime.toString(),
-                style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300,),
+                style: const TextStyle(fontSize: 10.0, fontWeight: FontWeight.w300,),
               )
             ],
           ),
@@ -68,6 +84,6 @@ class _ProfileState extends State<Profile> {
           ),
         ],
       ),
-    );
-  }
+    ));
+    }
 }

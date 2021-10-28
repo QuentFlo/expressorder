@@ -2,6 +2,7 @@ import 'package:express_order/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -34,6 +35,7 @@ class LoginPage extends StatelessWidget {
                     controller: controller.emailController,
                     validator: controller.validateEmail),
               ),
+
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
