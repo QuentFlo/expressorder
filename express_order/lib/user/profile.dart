@@ -20,7 +20,7 @@ class _ProfileState extends State<Profile> {
   final uid = FirebaseAuth.instance.currentUser!.uid;
   final email = FirebaseAuth.instance.currentUser!.email;
   final creationTime = FirebaseAuth.instance.currentUser!.metadata.creationTime;
-
+  // final rng = new random();
   User? user = FirebaseAuth.instance.currentUser;
 
   @override
@@ -41,7 +41,7 @@ class _ProfileState extends State<Profile> {
           MaterialButton(
                   onPressed: () {
                     controller.onOpenGallery();
-                    controller.uploadImage("ImageProfil");
+                    controller.uploadImage();
                   },
                   elevation: 5,
                   color: Colors.blueGrey,
