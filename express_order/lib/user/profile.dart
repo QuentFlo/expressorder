@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:express_order/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,8 +25,6 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(PickimgController());
-
-
     return SingleChildScrollView(
 
     child: Container(
@@ -36,7 +33,7 @@ class _ProfileState extends State<Profile> {
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
-              child: Obx(() => controller.image.value != null ? Image.file(controller.image.value!) : Image.asset('images/profil.png'),)),
+              child: Obx(() => controller.image.value != null ? Image.file(controller.image.value!) : Image.network(controller.imageUrl),)),
           const SizedBox(height: 50.0,),
           MaterialButton(
                   onPressed: () {
@@ -56,7 +53,7 @@ class _ProfileState extends State<Profile> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                  'Email: $email',
+                  '$email',
               style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w100,),
               ),
             ],

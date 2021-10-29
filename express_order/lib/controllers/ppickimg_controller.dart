@@ -8,7 +8,33 @@ class PickimgController extends GetxController {
   final picker = ImagePicker();
   final List listimage = [];
   final _storage = FirebaseStorage.instance;
-  String? imageUrl;
+  String imageUrl = "";
+
+
+Future<List<Map<String, dynamic>>> loadImages() async {
+    List<Map<String, dynamic>> files = [];
+
+    final data = FirebaseStorage.instance;
+    final ListResult result = await data.ref().list();
+    final List<Reference> allFiles = result.items;
+
+    await Future.forEach<Reference>(allFiles, (file) async {
+      final String fileUrl = await file.getDownloadURL();
+      files.add({
+        "url": fileUrl,
+        "path": file.fullPath,
+      });
+    });
+
+
+    return files;
+  }
+
+ profilpic() async {
+    final images = await loadImages();
+    imageUrl = images.last["url"];
+    return imageUrl;
+  }
 
   onOpenGallery() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);

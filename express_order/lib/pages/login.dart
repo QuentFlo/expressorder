@@ -1,7 +1,7 @@
 import 'package:express_order/controllers/login_controller.dart';
+import 'package:express_order/controllers/ppickimg_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,6 +9,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(LoginController());
+    final profilecontroller = Get.put(PickimgController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Form(
@@ -35,7 +36,6 @@ class LoginPage extends StatelessWidget {
                     controller: controller.emailController,
                     validator: controller.validateEmail),
               ),
-
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
@@ -57,7 +57,10 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      onPressed: () => controller.validnLogin(),
+                      onPressed: () {
+                        controller.validnLogin();
+                        profilecontroller.profilpic();
+                      },
                       child: const Text(
                         'Connexion',
                         style: TextStyle(fontSize: 18.0),
