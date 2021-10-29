@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:math';
 
 class PickimgController extends GetxController {
   Rx<File?> image = Rx(null);
@@ -35,6 +36,7 @@ Future<List<Map<String, dynamic>>> loadImages() async {
     imageUrl = images.last["url"];
     return imageUrl;
   }
+  final rng = Random();
 
   onOpenGallery() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -42,8 +44,8 @@ Future<List<Map<String, dynamic>>> loadImages() async {
     return image;
   }
 
-  uploadImage(name) async {
-  var snapshot = _storage.ref().child(name).putFile(image.value!);
+  uploadImage() async {
+  var snapshot = _storage.ref().child("ProfileImg"+rng.nextInt(100).toString()).putFile(image.value!);
 
   var downloadURL = await snapshot;
   return downloadURL;
