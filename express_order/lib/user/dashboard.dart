@@ -1,10 +1,14 @@
 import 'dart:io';
 
+import 'package:express_order/controllers/map_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:express_order/controllers/ppickimg_controller.dart';
+import 'package:express_order/controllers/map_controller.dart';
 import 'package:get/get.dart';
+import 'package:location/location.dart';
+
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key? key}) : super(key: key);
@@ -13,16 +17,18 @@ class Dashboard extends StatefulWidget {
   _State createState() => _State();
   final List listtest = [];
   final List listimage = [];
-  //late File image;
+  late File? image;
+  late LocationData _locationData;
 
 }
 
 class _State extends State<Dashboard> {
 
-  File? image;
+  //File? image;
   late String ok = " ";
   final List listtest = [];
   final List listimage = [];
+
 
 
   Future<dynamic> createAlertDialog2(BuildContext context) {
@@ -67,14 +73,14 @@ class _State extends State<Dashboard> {
   Future<dynamic> createAlertDialog(BuildContext context) {
     TextEditingController customContrller = TextEditingController();
     final picker = ImagePicker();
-    final controller = Get.find();
+    var controller = Get.put(MapController());
     
     Future onOpenGallery() async {
       final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
 
-        image = File(pickedFile!.path);
-        listimage.add(image);
+        widget.image = File(pickedFile!.path);
+        listimage.add(widget.image);
  
     }
 
@@ -113,6 +119,7 @@ class _State extends State<Dashboard> {
               ),
               MaterialButton(
                   onPressed: () {
+                    widget._locationData = controller.getLocation();
                     Navigator.of(context).pop(customContrller.text.toString());
                   },
                   elevation: 5,
@@ -121,6 +128,7 @@ class _State extends State<Dashboard> {
                   onPressed: () {
                     //controller.onOpenGallery();
                     onOpenGallery();
+                    
                   },
                   elevation: 5,
                   child: const Text("Choose photo"))
@@ -131,7 +139,6 @@ class _State extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(PickimgController());
     return Scaffold(
       appBar: AppBar(title: const Text("Boutique")),
       body: ListView(
@@ -172,8 +179,7 @@ class _State extends State<Dashboard> {
                       
                       ok = onValue;
                       
-                      listtest.add(
-                        ok);
+                      listtest.add(ok);
                       ScaffoldMessenger.of(context).showSnackBar(mySnackBar);
                     });
                   },
@@ -197,7 +203,9 @@ class _State extends State<Dashboard> {
               //   },
               // )
             ]),
-
+            // if (Widget._locationData != null) {
+            //   const Text(widget._locationData.toString());
+            // };
             ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
