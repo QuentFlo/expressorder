@@ -22,7 +22,7 @@ Sous Visual Studio Code :
 
 ![Alt text](https://drive.google.com/file/d/14OWeIyqlVM9K8FQSh0Ehg-tHTg_adWFS/view?usp=sharing )
 
-![Alt text](https://drive.google.com/file/d/1JHJ1CvRz8Nn_QV2T1_eBNGd6J7TouQdZ/view?usp=sharing )
+![image](https://drive.google.com/file/d/1JHJ1CvRz8Nn_QV2T1_eBNGd6J7TouQdZ/view?usp=sharing )
 
 
 Sous Android Studio :
