@@ -40,10 +40,9 @@ class _MyAddPageState extends State<MyAddPage> {
   }
 
   pickerGallery() async {
-    final pickedFile =
-        (await ImagePicker().pickImage(source: ImageSource.gallery));
+    final pickedFile = (await ImagePicker().pickImage(source: ImageSource.gallery));
     if (pickedFile != null) {
-      image = (pickedFile as File?)!;
+      image = File(pickedFile.path);
       setState(() {});
     }
   }
@@ -107,8 +106,9 @@ class _MyAddPageState extends State<MyAddPage> {
                         border: Border.all(color: Colors.blueAccent),
                       ),
                       padding: const EdgeInsets.all(5.0),
-                      child:
-                          image == null ? const Text('inserez une image') : Image.file(image!),
+                      child: image == null
+                          ? const Text('inserez une image')
+                          : Image.file(image!),
                     ),
                     const Divider(),
                     IconButton(
