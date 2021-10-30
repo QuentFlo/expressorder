@@ -5,7 +5,7 @@ Projet utilisant le langage Dart : Application permettant d'acheter ou vendre de
 ## Pour commencer
 
 clonez le projet à l'aide de la commande ``git clone https://github.com/QuentFlo/expressorder.git``
-puis faire cd ``express_order``
+puis faire ``cd express_order``
 
 ### Pré-requis
 
