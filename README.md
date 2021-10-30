@@ -20,18 +20,15 @@ Executez la commande ``flutter pub get`` pour pouvoir récupérer les dépendanc
 
 Sous Visual Studio Code :
 
-![Alt text](https://drive.google.com/file/d/14OWeIyqlVM9K8FQSh0Ehg-tHTg_adWFS/view?usp=sharing )
+<img width="236" alt="run" src="https://user-images.githubusercontent.com/72348896/139526482-a445e60d-d45a-4d31-a97d-e252014e13fb.PNG">
 
-![image](https://drive.google.com/file/d/1JHJ1CvRz8Nn_QV2T1_eBNGd6J7TouQdZ/view?usp=sharing )
-
-![image](https://user-images.githubusercontent.com/72348896/139526350-b5c6b866-e91d-4965-b097-3c08941a5ed4.png)
-
+<img width="452" alt="device" src="https://user-images.githubusercontent.com/72348896/139526505-12d60edd-8ee9-4ba9-a41b-1b26971c4410.PNG">
 
 Sous Android Studio :
 
-![Alt text](https://drive.google.com/file/d/1FB2R4VgSHyVnVCCTyPH9HXLeO7ERbA1w/view?usp=sharing )
+<img width="255" alt="device run android studio" src="https://user-images.githubusercontent.com/72348896/139526463-ff11d312-a880-46cd-894f-50bccdef9f1f.PNG">
 
-![Alt text](https://drive.google.com/file/d/1m_HEZcj6nWUi61hDMWV8Ga99PwWaIYm7/view?usp=sharing )
+<img width="196" alt="app launched" src="https://user-images.githubusercontent.com/72348896/139526442-a3d9f202-d6de-49dc-a74a-480422c39550.PNG">
 
 ## Auteurs
 
