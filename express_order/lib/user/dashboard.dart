@@ -4,10 +4,7 @@ import 'package:express_order/controllers/map_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:express_order/controllers/ppickimg_controller.dart';
-import 'package:express_order/controllers/map_controller.dart';
 import 'package:get/get.dart';
-import 'package:location/location.dart';
 
 
 class Dashboard extends StatefulWidget {
@@ -18,7 +15,6 @@ class Dashboard extends StatefulWidget {
   final List listtest = [];
   final List listimage = [];
   late File? image;
-  late LocationData _locationData;
 
 }
 
@@ -119,7 +115,6 @@ class _State extends State<Dashboard> {
               ),
               MaterialButton(
                   onPressed: () {
-                    widget._locationData = controller.getLocation();
                     Navigator.of(context).pop(customContrller.text.toString());
                   },
                   elevation: 5,

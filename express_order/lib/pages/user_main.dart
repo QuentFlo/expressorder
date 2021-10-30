@@ -1,3 +1,4 @@
+import 'package:express_order/user/add_items.dart';
 import 'package:express_order/user/change_pass.dart';
 import 'package:express_order/user/dashboard.dart';
 import 'package:express_order/user/profile.dart';
@@ -13,7 +14,8 @@ class UserMain extends StatefulWidget {
 class _UserMainState extends State<UserMain> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
-    Dashboard(),
+    const MyAddPage(),
+    // Dashboard(),
     const Profile(),
     const ChangePass(),
   ];
