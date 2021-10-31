@@ -9,6 +9,9 @@ class CommonThings {
 class MyAddPage extends StatelessWidget {
   const MyAddPage({ Key? key }) : super(key: key);
 
+
+
+
 Widget divider() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
@@ -80,7 +83,8 @@ Widget divider() {
                   ),
                   validator: controller.validateDesc,
                   onSaved: (value) => controller.item = value,
-                )
+                ),
+                
               ],
             ),
           ),
@@ -88,6 +92,7 @@ Widget divider() {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               ElevatedButton(
+              
                 onPressed: controller.createData,
                 child:
                     const Text('Publier', style: TextStyle(color: Colors.white)),

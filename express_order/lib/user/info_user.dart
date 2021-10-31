@@ -2,6 +2,7 @@ import 'package:express_order/pages/map.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:location/location.dart';
+import 'package:express_order/pages/map.dart';
 
 
 class MyInfoPage extends StatefulWidget {
@@ -17,11 +18,14 @@ class _MyInfoPageState extends State<MyInfoPage> {
   String? name;
   String? recipe;
   TextEditingController? nameInputController;
-  TextEditingController? recipeInputController;
+  TextEditingController? recipeInputController;  
+  TextEditingController? longitudeInputController;
+  TextEditingController? latitudeController;
 
   Location location = Location();
     LocationData? locationData;
-  LocationData? loc;
+  LocationData? _Location;
+  LocationData? _location2;
   
   getLocation() async {
 
@@ -46,6 +50,8 @@ class _MyInfoPageState extends State<MyInfoPage> {
     }
 
     locationData = await location.getLocation();
+    print("cacaaaaaa");
+    print(locationData);
     // if (locationData == null) {
     //   return "Localisation non disponible";
     // }
@@ -64,8 +70,10 @@ class _MyInfoPageState extends State<MyInfoPage> {
 
       locationData = await getLocation();
       setState(() {
-        loc = locationData;
+        _Location = locationData;
       });
+    print("hum?????");
+    print(_Location);
   }
 
    @override
@@ -76,7 +84,12 @@ class _MyInfoPageState extends State<MyInfoPage> {
         TextEditingController(text: widget.ds["item"]);
     nameInputController =
         TextEditingController(text: widget.ds["name"]);
+    longitudeInputController =
+        TextEditingController(text: widget.ds["longitude"]);
+    latitudeController =
+        TextEditingController(text: widget.ds["latitude"]);
     productImage = widget.ds["image"];
+
     locationhard();
   
   }
@@ -131,17 +144,17 @@ class _MyInfoPageState extends State<MyInfoPage> {
                   padding: EdgeInsets.only(top: 8.0),
                 ),
                 //print(locationData)
-                loc != null ? Text(loc!.latitude.toString() + "   " + loc!.longitude.toString()) : const Text("Localisation non disponible"),
+                _Location != null ? Text(_Location!.latitude.toString() + "   " + _Location!.longitude.toString()) : const Text("Localisation non disponible"),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(context,
                       MaterialPageRoute(
-                        builder: (context) => MyMap (location: loc,))
+                        builder: (context) => MyMap (location: _Location, longitude: double.parse(widget.ds["longitude"]), latitude: double.parse(widget.ds["latitude"]),))
                     );
                   }, 
-                  child: const Text('Send data map'),
+                  child: const Text('ouvrir carte'),
                   )
-                //Text(loc!.latitude.toString() + "   " + loc!.longitude.toString())
+                //Text(_Location!.latitude.toString() + "   " + _Location!.longitude.toString())
               ],
             ),
           ),
