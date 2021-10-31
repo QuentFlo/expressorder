@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:express_order/user/add_items.dart';
-import 'package:express_order/user/listview.dart';
 import 'package:express_order/user/info_user.dart';
 import 'package:express_order/user/update_items.dart';
 
@@ -63,26 +62,6 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Boutique'),
-        // actions: <Widget>[
-        //   IconButton(
-        //     icon: const Icon(Icons.list),
-        //     tooltip: 'List',
-        //     onPressed: () {
-        //       Route route =
-        //           MaterialPageRoute(builder: (context) => const MyListPage());
-        //       Navigator.push(context, route);
-        //     },
-        //   ),
-        //   IconButton(
-        //     icon: const Icon(Icons.search),
-        //     tooltip: 'Search',
-        //     onPressed: () {
-        //       Route route =
-        //           MaterialPageRoute(builder: (context) => const MyQueryPage());
-        //       Navigator.push(context, route);
-        //     },
-        //   ),
-        // ],
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance.collection("colitems").snapshots(),
@@ -94,9 +73,9 @@ class _HomePageState extends State<HomePage> {
             int length = snapshot.data!.docs.length;
             return GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, //two columns
-                  mainAxisSpacing: 0.1, //space the card
-                  childAspectRatio: 0.800, //space largo de cada card
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 0.1,
+                  childAspectRatio: 0.800,
                 ),
                 itemCount: length,
                 padding: const EdgeInsets.all(2.0),

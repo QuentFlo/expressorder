@@ -11,7 +11,7 @@ File? image;
 
 class MyUpdatePage extends StatefulWidget {
   final DocumentSnapshot ds;
-  const MyUpdatePage({required this.ds});
+  const MyUpdatePage({required this.ds, Key? key}) : super(key: key);
   @override
   _MyUpdatePageState createState() => _MyUpdatePageState();
 }
@@ -174,20 +174,20 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
                   DateTime now = DateTime.now();
                   String nuevoformato =
                       DateFormat('kk:mm:ss:MMMMd').format(now);
-                  var fullImageName = 'nomfoto-$nuevoformato' + '.jpg';
-                  var fullImageName2 = 'nomfoto-$nuevoformato' + '.jpg';
+                  var fullImageName = 'nomfoto-$nuevoformato' '.jpg';
+                  var fullImageName2 = 'nomfoto-$nuevoformato' '.jpg';
 
                   final Reference ref =
                       FirebaseStorage.instance.ref().child(fullImageName);
                   final UploadTask task = ref.putFile(image!);
 
                   var part1 =
-                      'https://firebasestorage.googleapis.com/v0/b/apprecetas-cfd25.appspot.com/o/'; //esto cambia segun su firestore
+                      'https://firebasestorage.googleapis.com/v0/b/expressorder-afeda.appspot.com/o/';
 
                   var fullPathImage = part1 + fullImageName2;
 
                   FirebaseFirestore.instance
-                      .collection('colrecipes')
+                      .collection('colitems')
                       .doc(widget.ds.id)
                       .update({
                     'name': nameInputController.text,

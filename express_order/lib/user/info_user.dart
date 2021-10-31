@@ -4,7 +4,7 @@ import 'package:location/location.dart';
 
 class MyInfoPage extends StatefulWidget {
   final DocumentSnapshot ds;
-   const MyInfoPage({required this.ds});
+   const MyInfoPage({required this.ds, Key? key}) : super(key: key);
   @override
   _MyInfoPageState createState() => _MyInfoPageState();
 }
@@ -160,7 +160,7 @@ class IniciarIcon extends StatelessWidget {
 }
 
 class IconoMenu extends StatelessWidget {
-  const IconoMenu({required this.icon, required this.label});
+  const IconoMenu({required this.icon, required this.label, Key? key}) : super(key: key);
   final IconData icon;
   final String label;
   @override
