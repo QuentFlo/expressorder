@@ -50,6 +50,7 @@ class _ShopPageState extends State<ShopPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Boutique'),
+            automaticallyImplyLeading: false,
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance.collection("colitems").snapshots(),
