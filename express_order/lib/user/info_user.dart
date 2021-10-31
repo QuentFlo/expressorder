@@ -2,7 +2,6 @@ import 'package:express_order/pages/map.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:location/location.dart';
-import 'package:express_order/pages/map.dart';
 
 
 class MyInfoPage extends StatefulWidget {
@@ -24,8 +23,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
 
   Location location = Location();
     LocationData? locationData;
-  LocationData? _Location;
-  LocationData? _location2;
+  LocationData? _location;
   
   getLocation() async {
 
@@ -50,8 +48,6 @@ class _MyInfoPageState extends State<MyInfoPage> {
     }
 
     locationData = await location.getLocation();
-    print("cacaaaaaa");
-    print(locationData);
     // if (locationData == null) {
     //   return "Localisation non disponible";
     // }
@@ -70,10 +66,8 @@ class _MyInfoPageState extends State<MyInfoPage> {
 
       locationData = await getLocation();
       setState(() {
-        _Location = locationData;
+        _location = locationData;
       });
-    print("hum?????");
-    print(_Location);
   }
 
    @override
@@ -144,12 +138,12 @@ class _MyInfoPageState extends State<MyInfoPage> {
                   padding: EdgeInsets.only(top: 8.0),
                 ),
                 //print(locationData)
-                _Location != null ? Text(_Location!.latitude.toString() + "   " + _Location!.longitude.toString()) : const Text("Localisation non disponible"),
+                _location != null ? Text(_location!.latitude.toString() + "   " + _location!.longitude.toString()) : const Text("Localisation non disponible"),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(context,
                       MaterialPageRoute(
-                        builder: (context) => MyMap (location: _Location, longitude: double.parse(widget.ds["longitude"]), latitude: double.parse(widget.ds["latitude"]),))
+                        builder: (context) => MyMap (location: _location, longitude: double.parse(widget.ds["longitude"]), latitude: double.parse(widget.ds["latitude"]),))
                     );
                   }, 
                   child: const Text('ouvrir carte'),

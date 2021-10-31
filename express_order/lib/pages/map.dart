@@ -5,11 +5,11 @@ import 'package:location/location.dart';
 
 class MyMap extends StatefulWidget {
 
-  LocationData? location;
-  double? longitude;
-  double? latitude;
+  final LocationData? location;
+  final double? longitude;
+  final double? latitude;
 
-  MyMap({required this.location, required this.longitude, required this.latitude  , Key? key }) : super(key: key);
+  const MyMap({required this.location, required this.longitude, required this.latitude  , Key? key }) : super(key: key);
 
   @override
   _MyMapState createState() => _MyMapState();
