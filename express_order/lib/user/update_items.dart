@@ -90,7 +90,7 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
     getPosts();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update Page'),
+        title: const Text('Modifier'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(8),
@@ -107,8 +107,8 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.blueAccent),
                       ),
-                      padding: EdgeInsets.all(5.0),
-                      child: image == null ? Text('Add') : Image.file(image!),
+                      padding: const EdgeInsets.all(5.0),
+                      child: image == null ? const Text('Add') : Image.file(image!),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 2.2),
@@ -119,7 +119,7 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
                             border: Border.all(color: Colors.blueAccent)),
                         padding: const EdgeInsets.all(5.0),
                         child: productImage == ''
-                            ? const Text('Edit')
+                            ? const Text('Modifier')
                             : Image.network(productImage + '?alt=media'),
                       ),
                     ),
@@ -131,40 +131,36 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
                         icon: const Icon(Icons.image), onPressed: pickerGallery),
                   ],
                 ),
-                Container(
-                  child: TextFormField(
-                    controller: nameInputController,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'name',
-                      fillColor: Colors.grey[300],
-                      filled: true,
-                    ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                    },
-                    onSaved: (value) => name = value,
+                TextFormField(
+                  controller: nameInputController,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Nom article',
+                    fillColor: Colors.grey[300],
+                    filled: true,
                   ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Veuillez saisir un titre';
+                    }
+                  },
+                  onSaved: (value) => name = value,
                 ),
-                Container(
-                  child: TextFormField(
-                    controller: recipeInputController,
-                    maxLines: 10,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'recipe',
-                      fillColor: Colors.grey[300],
-                      filled: true,
-                    ),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter some recipe';
-                      }
-                    },
-                    onSaved: (value) => recipe = value,
+                TextFormField(
+                  controller: recipeInputController,
+                  maxLines: 10,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Description',
+                    fillColor: Colors.grey[300],
+                    filled: true,
                   ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Veuillez saisir une description';
+                    }
+                  },
+                  onSaved: (value) => recipe = value,
                 )
               ],
             ),
@@ -173,7 +169,7 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               ElevatedButton(
-                child: const Text('Update'),
+                child: const Text('Modifier'),
                 onPressed: () {
                   DateTime now = DateTime.now();
                   String nuevoformato =
@@ -196,9 +192,9 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
                       .update({
                     'name': nameInputController.text,
                     'recipe': recipeInputController.text,
-                    'image': '$fullPathImage'
+                    'image': fullPathImage
                   });
-                  Navigator.of(context).pop(); //regrese a la pantalla anterior
+                  Navigator.of(context).pop();
                 },
               ),
             ],

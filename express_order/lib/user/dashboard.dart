@@ -1,10 +1,8 @@
 import 'dart:io';
 
-import 'package:express_order/controllers/map_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:get/get.dart';
 
 
 class Dashboard extends StatefulWidget {
@@ -69,7 +67,6 @@ class _State extends State<Dashboard> {
   Future<dynamic> createAlertDialog(BuildContext context) {
     TextEditingController customContrller = TextEditingController();
     final picker = ImagePicker();
-    var controller = Get.put(MapController());
     
     Future onOpenGallery() async {
       final pickedFile = await picker.pickImage(source: ImageSource.gallery);

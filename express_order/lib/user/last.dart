@@ -23,7 +23,8 @@ class MyQueryPage extends StatefulWidget {
 
 class _MyQueryPageState extends State<MyQueryPage> {
   //List<String> names = List.from(document['name']);
-  var selectedCurrency, selectedType;
+  var selectedCurrency;
+  var selectedType;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

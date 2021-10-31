@@ -42,7 +42,7 @@ class LoginPage extends StatelessWidget {
                     autofocus: false,
                     obscureText: true,
                     decoration: const InputDecoration(
-                      labelText: 'Password',
+                      labelText: 'Mot de passe',
                       labelStyle: TextStyle(fontSize: 20.0),
                       border: OutlineInputBorder(),
                       errorStyle:

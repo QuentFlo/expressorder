@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'dart:math';
 
 
@@ -62,10 +61,7 @@ class _MyAddPageState extends State<MyAddPage> {
   }
 
   void createData() async {
-    DateTime now = DateTime.now();
-    String nuevoformato = DateFormat('kk:mm:ss:MMMMd').format(now);
     var fullImageName = 'imageitem';
-    var fullImageName2 = 'nomfoto-$nuevoformato' '.jpg';
     ok = rng.nextInt(100).toString();
 
     final Reference ref = FirebaseStorage.instance.ref().child(fullImageName + ok);
@@ -93,7 +89,7 @@ class _MyAddPageState extends State<MyAddPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Page'),
+        title: const Text('Ajouter un article'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(8),
@@ -134,7 +130,7 @@ class _MyAddPageState extends State<MyAddPage> {
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please enter some text';
+                      return 'Veuillez saisir un titre';
                     }
                   },
                   onSaved: (value) => name = value,
@@ -143,13 +139,13 @@ class _MyAddPageState extends State<MyAddPage> {
                   maxLines: 10,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'articles',
+                    hintText: 'Description',
                     fillColor: Colors.grey[300],
                     filled: true,
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please enter some recipe';
+                      return 'Veuillez saisir une description';
                     }
                   },
                   onSaved: (value) => item = value,
@@ -163,7 +159,7 @@ class _MyAddPageState extends State<MyAddPage> {
               ElevatedButton(
                 onPressed: createData,
                 child:
-                    const Text('Create', style: TextStyle(color: Colors.white)),
+                    const Text('Publier', style: TextStyle(color: Colors.white)),
               ),
             ],
           )

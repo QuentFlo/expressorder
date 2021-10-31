@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'View Page1',
+      title: 'Boutique',
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
@@ -78,13 +78,13 @@ class _MyListPageState extends State<MyListPage> {
     //print('Width of the screen: ${CommonThings.size.width}');
     return Scaffold(
       appBar: AppBar(
-        title: const Text('View Page1'),
+        title: const Text('Détails'),
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection("colitems").snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
-            return const Text("loading....");
+            return const Text("Chargement....");
           }
           int length = snapshot.data!.docs.length;
           //print("from the streamBuilder: "+ snapshot.data.documents[]);

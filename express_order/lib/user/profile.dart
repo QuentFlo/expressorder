@@ -42,7 +42,7 @@ class _ProfileState extends State<Profile> {
                   },
                   elevation: 5,
                   color: Colors.blueGrey,
-                  child: const Text("Choose photo")),
+                  child: const Text("Selectionner une image")),
                   
           Column(
             children: const [

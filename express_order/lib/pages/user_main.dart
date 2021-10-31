@@ -1,6 +1,4 @@
-import 'package:express_order/user/add_items.dart';
 import 'package:express_order/user/change_pass.dart';
-import 'package:express_order/user/dashboard.dart';
 import 'package:express_order/user/profile.dart';
 import 'package:express_order/user/pull_items.dart';
 import 'package:flutter/material.dart';

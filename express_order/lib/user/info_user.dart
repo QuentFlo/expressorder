@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:express_order/controllers/map_controller.dart';
-import 'package:get/get.dart';
 import 'package:location/location.dart';
 
 class MyInfoPage extends StatefulWidget {
   final DocumentSnapshot ds;
-  const MyInfoPage({required this.ds});
+   const MyInfoPage({required this.ds});
   @override
   _MyInfoPageState createState() => _MyInfoPageState();
 }
@@ -47,7 +45,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
 
     locationData = await location.getLocation();
     if (locationData == null) {
-      return "no localisation";
+      return "Localisation non disponible";
     }
     return (locationData);
   }
@@ -79,7 +77,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
     //_Location = getLocation();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Information Page'),
+        title: const Text('Détails'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
@@ -96,43 +94,32 @@ class _MyInfoPageState extends State<MyInfoPage> {
                           border: Border.all(color: Colors.blueAccent)),
                       padding: const EdgeInsets.all(5.0),
                       child: productImage == ''
-                          ? const Text('Edit')
+                          ? const Text('Modifier')
                           : Image.network(productImage !+ '?alt=media'),
                     ),                    
                   ],
                 ),
-                const IniciarIcon(),
+                // const IniciarIcon(),
                 ListTile(
-                  leading: const Icon(Icons.person, color: Colors.black),
-                  title: TextFormField(
-                    controller: nameInputController,
-                    validator: (value) {
-                      if (value!.isEmpty) return "Ingresa un nombre";
-                    },
-                    decoration: const InputDecoration(
-                        hintText: "Name", labelText: "Name"),
-                  ),
+                  leading: const Icon(Icons.article, color: Colors.black),
+                  title: Text(
+                    nameInputController!.text,),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 8.0),
                 ),
                 ListTile(
-                  leading: const Icon(Icons.list, color: Colors.black),
-                  title: TextFormField(
+                  leading: const Icon(Icons.description, color: Colors.black),
+                  title: Text(
+                    recipeInputController!.text,
                     maxLines: 10,
-                    controller: recipeInputController,
-                    validator: (value) {
-                      if (value!.isEmpty) return "Ingresa un nombre";
-                    },
-                    decoration: const InputDecoration(
-                        hintText: "item", labelText: "item"),
                   ),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 8.0),
                 ),
                 
-                locationData != null ? Text(locationData!.latitude.toString() + "   " + locationData!.longitude.toString()) : Text("no localisation")
+                locationData != null ? Text(locationData!.latitude.toString() + "   " + locationData!.longitude.toString()) : const Text("Localisation non disponible")
                 
               ],
             ),
