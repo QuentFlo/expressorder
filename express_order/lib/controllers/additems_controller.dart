@@ -23,10 +23,10 @@ class AddController extends GetxController {
   String ok = "";
 
   pickerCam() async {
-    File? pickedFile =
-        (await ImagePicker().pickImage(source: ImageSource.camera)) as File?;
+    final pickedFile =
+        (await ImagePicker().pickImage(source: ImageSource.camera));
     if (pickedFile != null) {
-      image = pickedFile;
+      image = File(pickedFile.path);
     }
   }
 
@@ -44,7 +44,7 @@ class AddController extends GetxController {
 
     final Reference ref =
         FirebaseStorage.instance.ref().child(fullImageName + ok);
-    final UploadTask task = ref.putFile(image!);
+    ref.putFile(image!);
 
     var part1 =
         'https://firebasestorage.googleapis.com/v0/b/expressorder-afeda.appspot.com/o/imageitem';

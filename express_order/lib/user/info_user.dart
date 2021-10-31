@@ -2,7 +2,6 @@ import 'package:express_order/pages/map.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:location/location.dart';
-import 'package:express_order/pages/map.dart';
 
 
 class MyInfoPage extends StatefulWidget {
@@ -22,7 +21,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
 
   Location location = Location();
     LocationData? locationData;
-  LocationData? _Location;
+  LocationData? loc;
   
   getLocation() async {
 
@@ -47,8 +46,6 @@ class _MyInfoPageState extends State<MyInfoPage> {
     }
 
     locationData = await location.getLocation();
-    print("cacaaaaaa");
-    print(locationData);
     // if (locationData == null) {
     //   return "Localisation non disponible";
     // }
@@ -67,10 +64,8 @@ class _MyInfoPageState extends State<MyInfoPage> {
 
       locationData = await getLocation();
       setState(() {
-        _Location = locationData;
+        loc = locationData;
       });
-    print("hum?????");
-    print(_Location);
   }
 
    @override
@@ -136,17 +131,17 @@ class _MyInfoPageState extends State<MyInfoPage> {
                   padding: EdgeInsets.only(top: 8.0),
                 ),
                 //print(locationData)
-                _Location != null ? Text(_Location!.latitude.toString() + "   " + _Location!.longitude.toString()) : const Text("Localisation non disponible"),
+                loc != null ? Text(loc!.latitude.toString() + "   " + loc!.longitude.toString()) : const Text("Localisation non disponible"),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(context,
                       MaterialPageRoute(
-                        builder: (context) => MyMap (location: _Location,))
+                        builder: (context) => MyMap (location: loc,))
                     );
                   }, 
                   child: const Text('Send data map'),
                   )
-                //Text(_Location!.latitude.toString() + "   " + _Location!.longitude.toString())
+                //Text(loc!.latitude.toString() + "   " + loc!.longitude.toString())
               ],
             ),
           ),

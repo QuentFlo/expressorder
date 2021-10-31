@@ -8,7 +8,6 @@ import 'package:intl/intl.dart'; //formateo hora
 String? filename;
 File? image;
 
-
 class MyUpdatePage extends StatefulWidget {
   final DocumentSnapshot ds;
   const MyUpdatePage({required this.ds, Key? key}) : super(key: key);
@@ -21,7 +20,6 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
   late TextEditingController recipeInputController;
   late TextEditingController nameInputController;
   late TextEditingController imageInputController;
-
 
   String? id;
   final db = FirebaseFirestore.instance;
@@ -39,7 +37,8 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
   }
 
   pickerGallery() async {
-    final pickedFile = (await ImagePicker().pickImage(source: ImageSource.gallery));
+    final pickedFile =
+        (await ImagePicker().pickImage(source: ImageSource.gallery));
     if (pickedFile != null) {
       image = File(pickedFile.path);
       setState(() {});
@@ -59,10 +58,8 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
   @override
   void initState() {
     super.initState();
-    recipeInputController =
-        TextEditingController(text: widget.ds["item"]);
-    nameInputController =
-        TextEditingController(text: widget.ds["name"]);
+    recipeInputController = TextEditingController(text: widget.ds["item"]);
+    nameInputController = TextEditingController(text: widget.ds["name"]);
     productImage = widget.ds["image"]; //nuevo
   }
 
@@ -108,7 +105,9 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
                         border: Border.all(color: Colors.blueAccent),
                       ),
                       padding: const EdgeInsets.all(5.0),
-                      child: image == null ? const Text('Add') : Image.file(image!),
+                      child: image == null
+                          ? const Text('Add')
+                          : Image.file(image!),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 2.2),
@@ -125,10 +124,12 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
                     ),
                     const Divider(),
                     IconButton(
-                        icon: const Icon(Icons.camera_alt), onPressed: pickerCam),
+                        icon: const Icon(Icons.camera_alt),
+                        onPressed: pickerCam),
                     const Divider(),
                     IconButton(
-                        icon: const Icon(Icons.image), onPressed: pickerGallery),
+                        icon: const Icon(Icons.image),
+                        onPressed: pickerGallery),
                   ],
                 ),
                 TextFormField(
@@ -179,7 +180,7 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
 
                   final Reference ref =
                       FirebaseStorage.instance.ref().child(fullImageName);
-                  final UploadTask task = ref.putFile(image!);
+                  ref.putFile(image!);
 
                   var part1 =
                       'https://firebasestorage.googleapis.com/v0/b/expressorder-afeda.appspot.com/o/';
