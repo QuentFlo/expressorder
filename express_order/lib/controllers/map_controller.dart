@@ -3,7 +3,7 @@ import 'package:location/location.dart';
 
 class MapController extends GetxController {
   final Location location = Location();
-  late LocationData _locationData;
+  late LocationData locationData;
   
   getLocation() async {
 
@@ -27,8 +27,8 @@ class MapController extends GetxController {
       }
     }
 
-    _locationData = await location.getLocation();
-    return (_locationData);
+    locationData = await location.getLocation();
+    return (locationData);
 //     location.onLocationChanged.listen((LocationData currentLocation) {
 //   // Use current location
 // });

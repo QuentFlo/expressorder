@@ -4,6 +4,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'dart:math';
+
 
 File? image;
 String? filename;
@@ -28,7 +30,9 @@ class _MyAddPageState extends State<MyAddPage> {
   final db = FirebaseFirestore.instance;
   final _formKey = GlobalKey<FormState>();
   String? name;
+  final rng = Random();
   String? item;
+  String ok = "";
 
   pickerCam() async {
     File? pickedFile =
@@ -60,17 +64,18 @@ class _MyAddPageState extends State<MyAddPage> {
   void createData() async {
     DateTime now = DateTime.now();
     String nuevoformato = DateFormat('kk:mm:ss:MMMMd').format(now);
-    var fullImageName = 'nomfoto-$nuevoformato' '.jpg';
+    var fullImageName = 'imageitem';
     var fullImageName2 = 'nomfoto-$nuevoformato' '.jpg';
+    ok = rng.nextInt(100).toString();
 
-    final Reference ref = FirebaseStorage.instance.ref().child(fullImageName);
+    final Reference ref = FirebaseStorage.instance.ref().child(fullImageName + ok);
     final UploadTask task = ref.putFile(image!);
 
     var part1 =
-        'https://firebasestorage.googleapis.com/v0/b/expressorder-afeda.appspot.com/o/';
+        'https://firebasestorage.googleapis.com/v0/b/expressorder-afeda.appspot.com/o/imageitem';
 
-    var fullPathImage = part1 + fullImageName2;
-    print(fullPathImage);
+    var fullPathImage = part1 + ok;
+
 
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -78,7 +83,7 @@ class _MyAddPageState extends State<MyAddPage> {
           .collection('colitems')
           .add({'name': '$name', 'item': '$item', 'image': fullPathImage});
       setState(() => id = ref.id);
-      Navigator.of(context).pop(); //regrese a la pantalla anterior
+      Navigator.of(context).pop();
     }
   }
 
