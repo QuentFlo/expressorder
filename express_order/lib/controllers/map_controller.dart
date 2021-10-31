@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 import 'package:location/location.dart';
 
 class MapController extends GetxController {
-  final Location location = Location();
-  late LocationData locationData;
+  Location location = Location();
+    LocationData? locationData;
   
   getLocation() async {
 
@@ -28,10 +28,11 @@ class MapController extends GetxController {
     }
 
     locationData = await location.getLocation();
+    print("cacaaaaaa");
+    print(locationData);
+    // if (locationData == null) {
+    //   return "Localisation non disponible";
+    // }
     return (locationData);
-//     location.onLocationChanged.listen((LocationData currentLocation) {
-//   // Use current location
-// });
-
   }
 }

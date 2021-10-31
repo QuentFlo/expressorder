@@ -18,11 +18,14 @@ class _MyInfoPageState extends State<MyInfoPage> {
   String? name;
   String? recipe;
   TextEditingController? nameInputController;
-  TextEditingController? recipeInputController;
+  TextEditingController? recipeInputController;  
+  TextEditingController? longitudeInputController;
+  TextEditingController? latitudeController;
 
   Location location = Location();
     LocationData? locationData;
   LocationData? _Location;
+  LocationData? _location2;
   
   getLocation() async {
 
@@ -81,7 +84,12 @@ class _MyInfoPageState extends State<MyInfoPage> {
         TextEditingController(text: widget.ds["item"]);
     nameInputController =
         TextEditingController(text: widget.ds["name"]);
+    longitudeInputController =
+        TextEditingController(text: widget.ds["longitude"]);
+    latitudeController =
+        TextEditingController(text: widget.ds["latitude"]);
     productImage = widget.ds["image"];
+
     locationhard();
   
   }
@@ -141,10 +149,10 @@ class _MyInfoPageState extends State<MyInfoPage> {
                   onPressed: () {
                     Navigator.push(context,
                       MaterialPageRoute(
-                        builder: (context) => MyMap (location: _Location,))
+                        builder: (context) => MyMap (location: _Location, longitude: double.parse(widget.ds["longitude"]), latitude: double.parse(widget.ds["latitude"]),))
                     );
                   }, 
-                  child: const Text('Send data map'),
+                  child: const Text('ouvrir carte'),
                   )
                 //Text(_Location!.latitude.toString() + "   " + _Location!.longitude.toString())
               ],
