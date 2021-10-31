@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:express_order/user/add_items.dart';
 import 'package:express_order/user/info_user.dart';
@@ -17,25 +16,9 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
-  TextEditingController? itemsInputController;
-  TextEditingController? nameInputController;
-  TextEditingController? imageInputController;
+
   String? id;
   final db = FirebaseFirestore.instance;
-  String? name;
-  String? item;
-  dynamic url;
-
-  void deleteData(DocumentSnapshot doc) async {
-    await db.collection('colitems').doc(doc.id).delete();
-    setState(() => id = null);
-  }
-
-  getFirebase() async {
-    final ref = FirebaseStorage.instance.ref();
-    url = await ref.getDownloadURL();
-    return url;
-  }
 
   navigateToDetail(DocumentSnapshot ds) {
     Navigator.push(
@@ -53,6 +36,11 @@ class _ShopPageState extends State<ShopPage> {
             builder: (context) => MyInfoPage(
                   ds: ds,
                 )));
+  }
+
+  void deleteData(DocumentSnapshot doc) async {
+    await db.collection('colitems').doc(doc.id).delete();
+    id = null;
   }
 
   @override
