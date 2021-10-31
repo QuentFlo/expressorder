@@ -9,14 +9,14 @@ class CommonThings {
   static Size? size;
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class ShopPage extends StatefulWidget {
+  const ShopPage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _ShopPageState createState() => _ShopPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ShopPageState extends State<ShopPage> {
   TextEditingController? itemsInputController;
   TextEditingController? nameInputController;
   TextEditingController? imageInputController;

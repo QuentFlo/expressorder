@@ -1,56 +1,15 @@
-import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:express_order/controllers/additems_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:math';
-
-
-File? image;
-String? filename;
+import 'package:get/get.dart';
 
 class CommonThings {
   static Size? size;
 }
 
-class MyAddPage extends StatefulWidget {
-  const MyAddPage({Key? key}) : super(key: key);
+class MyAddPage extends StatelessWidget {
+  const MyAddPage({ Key? key }) : super(key: key);
 
-  @override
-  _MyAddPageState createState() => _MyAddPageState();
-}
-
-class _MyAddPageState extends State<MyAddPage> {
-  TextEditingController? itemsInputController;
-  TextEditingController? nameInputController;
-  TextEditingController? imageInputController;
-
-  String? id;
-  final db = FirebaseFirestore.instance;
-  final _formKey = GlobalKey<FormState>();
-  String? name;
-  final rng = Random();
-  String? item;
-  String ok = "";
-
-  pickerCam() async {
-    File? pickedFile =
-        (await ImagePicker().pickImage(source: ImageSource.camera)) as File?;
-    if (pickedFile != null) {
-      image = pickedFile;
-      setState(() {});
-    }
-  }
-
-  pickerGallery() async {
-    final pickedFile = (await ImagePicker().pickImage(source: ImageSource.gallery));
-    if (pickedFile != null) {
-      image = File(pickedFile.path);
-      setState(() {});
-    }
-  }
-
-  Widget divider() {
+Widget divider() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
       child: Container(
@@ -60,31 +19,11 @@ class _MyAddPageState extends State<MyAddPage> {
     );
   }
 
-  void createData() async {
-    var fullImageName = 'imageitem';
-    ok = rng.nextInt(100).toString();
-
-    final Reference ref = FirebaseStorage.instance.ref().child(fullImageName + ok);
-    final UploadTask task = ref.putFile(image!);
-
-    var part1 =
-        'https://firebasestorage.googleapis.com/v0/b/expressorder-afeda.appspot.com/o/imageitem';
-
-    var fullPathImage = part1 + ok;
-
-
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      DocumentReference ref = await db
-          .collection('colitems')
-          .add({'name': '$name', 'item': '$item', 'image': fullPathImage});
-      setState(() => id = ref.id);
-      Navigator.of(context).pop();
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(AddController());
     CommonThings.size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -95,7 +34,7 @@ class _MyAddPageState extends State<MyAddPage> {
         padding: const EdgeInsets.all(8),
         children: <Widget>[
           Form(
-            key: _formKey,
+            key: controller.formKey,
             child: Column(
               children: <Widget>[
                 Row(
@@ -107,18 +46,18 @@ class _MyAddPageState extends State<MyAddPage> {
                         border: Border.all(color: Colors.blueAccent),
                       ),
                       padding: const EdgeInsets.all(5.0),
-                      child: image == null
+                      child: controller.image == null
                           ? const Text('inserez une image')
-                          : Image.file(image!),
+                          : Image.file(controller.image!),
                     ),
                     const Divider(),
                     IconButton(
                         icon: const Icon(Icons.camera_alt),
-                        onPressed: pickerCam),
+                        onPressed: controller.pickerCam),
                     const Divider(),
                     IconButton(
                         icon: const Icon(Icons.image),
-                        onPressed: pickerGallery),
+                        onPressed: controller.pickerGallery),
                   ],
                 ),
                 TextFormField(
@@ -128,12 +67,8 @@ class _MyAddPageState extends State<MyAddPage> {
                     fillColor: Colors.grey[300],
                     filled: true,
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Veuillez saisir un titre';
-                    }
-                  },
-                  onSaved: (value) => name = value,
+                  validator: controller.validateTitle,
+                  onSaved: (value) => controller.name = value,
                 ),
                 TextFormField(
                   maxLines: 10,
@@ -143,12 +78,8 @@ class _MyAddPageState extends State<MyAddPage> {
                     fillColor: Colors.grey[300],
                     filled: true,
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Veuillez saisir une description';
-                    }
-                  },
-                  onSaved: (value) => item = value,
+                  validator: controller.validateDesc,
+                  onSaved: (value) => controller.item = value,
                 )
               ],
             ),
@@ -157,7 +88,7 @@ class _MyAddPageState extends State<MyAddPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               ElevatedButton(
-                onPressed: createData,
+                onPressed: controller.createData,
                 child:
                     const Text('Publier', style: TextStyle(color: Colors.white)),
               ),

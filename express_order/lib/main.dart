@@ -2,6 +2,7 @@ import 'package:express_order/pages/forgot_pass.dart';
 import 'package:express_order/pages/login.dart';
 import 'package:express_order/pages/signup.dart';
 import 'package:express_order/pages/user_main.dart';
+import 'package:express_order/user/pull_items.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
             GetPage(name: "/usermain", page: () => const UserMain()),
             GetPage(name: "/forgotpass", page: () => const ForgotPass()),
             GetPage(name: "/signup", page: () => const Signup()),
+            GetPage(name: "/shop", page: () => const ShopPage()),
           ],
       );
     });
